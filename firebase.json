@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "smite-updater",
+      "public": "dist/smite-updater",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+@import './themes/eliteownage.scss';
+
+// body {
+//     color: white;
+//     background-color: rgb(51, 51, 51);
+// }
+
+mat-form-field, mat-checkbox {
+    margin-right: 2ex;
+}

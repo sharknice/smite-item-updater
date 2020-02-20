@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "smite-4957a": {
+      "hosting": {
+        "smite-updater": [
+          "smite-4957a"
+        ]
+      }
+    }
+  }
+}

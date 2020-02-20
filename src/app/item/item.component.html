@@ -1,0 +1,159 @@
+<mat-expansion-panel>
+
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            <img class="item-icon" [src]="item.icon" />
+            <div class="item-name">{{item.name}}</div>
+            <button mat-icon-button aria-label="duplicate item" color="primary"
+                (click)="duplicateItem(); $event.stopPropagation();">
+                <mat-icon>file_copy</mat-icon>
+            </button>
+            <button mat-icon-button aria-label="delete item" color="warn"
+                (click)="deleteItem(); $event.stopPropagation();">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </mat-panel-title>
+        <mat-panel-description>
+            <div class="collapsed-description" *ngIf="item.tier">T{{item.tier}}</div>
+            <div class="collapsed-description" *ngIf="item.cost">${{item.cost}}</div>
+            <div class="collapsed-description" *ngIf="item.type">{{item.type}}</div>
+            <div class="collapsed-description" *ngIf="item.physicalPower">PWR {{item.physicalPower}}</div>
+            <div class="collapsed-description" *ngIf="item.magicalPower">PWR {{item.magicalPower}}</div>
+            <div class="collapsed-description" *ngIf="item.attackSpeed">AS {{item.attackSpeed}}</div>
+            <div class="collapsed-description" *ngIf="item.physicalLifesteal">LS {{item.physicalLifesteal}}</div>
+            <div class="collapsed-description" *ngIf="item.magicalLifesteal">LS {{item.magicalLifesteal}}</div>
+            <div class="collapsed-description" *ngIf="item.physicalPenetration">PEN {{item.physicalPenetration}}</div>
+            <div class="collapsed-description" *ngIf="item.magicalPenetration">PEN {{item.magicalPenetration}}</div>
+            <div class="collapsed-description" *ngIf="item.criticalChance">CRIT {{item.criticalChance}}</div>
+            <div class="collapsed-description" *ngIf="item.physicalProtection">PROT {{item.physicalProtection}}</div>
+            <div class="collapsed-description" *ngIf="item.magicalProtection">PROT {{item.magicalProtection}}</div>
+            <div class="collapsed-description" *ngIf="item.health">HP {{item.health}}</div>
+            <div class="collapsed-description" *ngIf="item.hpFive">HP5 {{item.hpFive}}</div>
+            <div class="collapsed-description" *ngIf="item.crowdControl">CCR {{item.crowdControl}}</div>
+            <div class="collapsed-description" *ngIf="item.movementSpeed">SPD {{item.movementSpeed}}</div>
+            <div class="collapsed-description" *ngIf="item.cooldownReduction">CDR {{item.cooldownReduction}}</div>
+            <div class="collapsed-description" *ngIf="item.mana">MANA {{item.mana}}</div>
+            <div class="collapsed-description" *ngIf="item.mpFive">MP5 {{item.mpFive}}</div>
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+    <ng-template matExpansionPanelContent>
+        <div class="item-body">
+            <div>
+                <mat-form-field>
+                    <input matInput [(ngModel)]="item.name" type="text" placeholder="Name">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Tier</mat-label>
+                    <mat-select [(value)]="item.tier" (selectionChange)="onTierChange($event.value)">
+                        <mat-option [value]="1">1</mat-option>
+                        <mat-option [value]="2">2</mat-option>
+                        <mat-option [value]="3">3</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Type</mat-label>
+                    <mat-select [(value)]="item.type" (selectionChange)="onTypeChange($event.value)">
+                        <mat-option value="Both">Both</mat-option>
+                        <mat-option value="Physical">Physical</mat-option>
+                        <mat-option value="Magical">Magical</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput [(ngModel)]="item.cost" type="number" placeholder="Cost">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput [(ngModel)]="item.icon" type="text" placeholder="Icon URL">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput [(ngModel)]="item.passive" type="text" placeholder="Passive Description">
+                </mat-form-field>
+                <mat-checkbox [(ngModel)]="item.shoes">Shoes</mat-checkbox>
+            </div>
+            <mat-card>
+                <mat-card-title>Offensive</mat-card-title>
+                <app-offensive-stats [item]="item" [type]="item.type"></app-offensive-stats>
+            </mat-card>
+            <mat-card>
+                <mat-card-title>Defensive</mat-card-title>
+                <app-defensive-stats [item]="item" [type]="item.type"></app-defensive-stats>
+            </mat-card>
+            <mat-card>
+                <mat-card-title>Utility</mat-card-title>
+                <app-utility-stats [item]="item" [type]="item.type"></app-utility-stats>
+            </mat-card>
+            <mat-card>
+                <mat-card-title>Special</mat-card-title>
+                <div>
+                    <mat-form-field *ngIf="item.type === 'Physical'">
+                        <input matInput [(ngModel)]="item.physicalPenetrationPercent" type="number"
+                            placeholder="Physical Penetration Percent">
+                    </mat-form-field>
+                    <mat-form-field *ngIf="item.type === 'Magical'">
+                        <input matInput [(ngModel)]="item.magicalPowerPercentage" type="number"
+                            placeholder="Magical Power Percent">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="item.hpFiveFromPercentMaxHealth" type="number"
+                            placeholder="HP5 from % Max Health">
+                    </mat-form-field>
+                    <mat-form-field *ngIf="item.type === 'Physical'">
+                        <input matInput [(ngModel)]="item.manaToPhysicalPower" type="number"
+                            placeholder="% Mana Converted to Physical Power">
+                    </mat-form-field>
+                    <mat-form-field *ngIf="item.type === 'Magical'">
+                        <input matInput [(ngModel)]="item.manaToMagicalPower" type="number"
+                            placeholder="% Mana Converted to Magical Power">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="item.notShown" type="number" placeholder="Warning Message">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-checkbox [(ngModel)]="stacks" (change)="onStacksChange($event.checked)">Stacks</mat-checkbox>
+                    <mat-checkbox [(ngModel)]="toggleStats" (change)="onToggleStatsChange($event.checked)">Conditional Stats</mat-checkbox>
+                    <mat-checkbox *ngIf="item.tier && item.tier != 3" [(ngModel)]="item.autobuilder">Include in
+                        Autobuilder
+                    </mat-checkbox>
+                    <mat-checkbox [(ngModel)]="enemyInAura" (change)="onEnemyInAuraChange($event.checked)">Aura Affects Enemies</mat-checkbox>
+                </div>
+                <mat-card *ngIf="stacks">
+                    <mat-card-title>Stacks</mat-card-title>
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="item.stacks.max" type="number" placeholder="Max Stacks"
+                            (input)="updateStacksCurrent(item.stacks.type)">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Type</mat-label>
+                        <mat-select [(value)]="item.stacks.type" (selectionChange)="updateStacksCurrent($event.value)">
+                            <mat-option value="temporary">Temporary</mat-option>
+                            <mat-option value="permanent">Permanent</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <div>
+                        <app-offensive-stats [item]="item.stacks.stacks" [type]="item.type"></app-offensive-stats>
+                    </div>
+                    <div>
+                        <app-defensive-stats [item]="item.stacks.stacks" [type]="item.type"></app-defensive-stats>
+                    </div>
+                    <div>
+                        <app-utility-stats [item]="item.stacks.stacks" [type]="item.type"></app-utility-stats>
+                    </div>
+                </mat-card>
+                <mat-card *ngIf="toggleStats">
+                    <mat-card-title>Conditional Stats</mat-card-title>
+                    <div>
+                        <app-offensive-stats [item]="item.toggleStats" [type]="item.type"></app-offensive-stats>
+                    </div>
+                    <div>
+                        <app-defensive-stats [item]="item.toggleStats" [type]="item.type"></app-defensive-stats>
+                    </div>
+                    <div>
+                        <app-utility-stats [item]="item.toggleStats" [type]="item.type"></app-utility-stats>
+                    </div>
+                </mat-card>
+
+            </mat-card>
+        </div>
+
+    </ng-template>
+</mat-expansion-panel>

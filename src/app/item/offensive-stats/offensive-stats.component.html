@@ -1,0 +1,24 @@
+<mat-form-field *ngIf="type === 'Physical'">
+    <input matInput [(ngModel)]="item.physicalPower" type="number" placeholder="Physical Power">
+</mat-form-field>
+<mat-form-field *ngIf="type === 'Magical'">
+    <input matInput [(ngModel)]="item.magicalPower" type="number" placeholder="Magical Power">
+</mat-form-field>
+<mat-form-field>
+    <input matInput [(ngModel)]="item.attackSpeed" type="number" placeholder="Attack Speed">
+</mat-form-field>
+<mat-form-field *ngIf="type === 'Physical'">
+    <input matInput [(ngModel)]="item.physicalLifesteal" type="number" placeholder="Physical Lifesteal">
+</mat-form-field>
+<mat-form-field *ngIf="type === 'Magical'">
+    <input matInput [(ngModel)]="item.magicalLifesteal" type="number" placeholder="Magical Lifesteal">
+</mat-form-field>
+<mat-form-field *ngIf="type === 'Physical'">
+    <input matInput [(ngModel)]="item.physicalPenetration" type="number" placeholder="Physical Penetration">
+</mat-form-field>
+<mat-form-field *ngIf="type === 'Magical'">
+    <input matInput [(ngModel)]="item.magicalPenetration" type="number" placeholder="Magical Penetration">
+</mat-form-field>
+<mat-form-field *ngIf="type === 'Physical'">
+    <input matInput [(ngModel)]="item.criticalChance" type="number" placeholder="Critical Chance">
+</mat-form-field>
