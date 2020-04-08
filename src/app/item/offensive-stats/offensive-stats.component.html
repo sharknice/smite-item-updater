@@ -16,8 +16,14 @@
 <mat-form-field *ngIf="type === 'Physical'">
     <input matInput [(ngModel)]="item.physicalPenetration" type="number" placeholder="Physical Penetration">
 </mat-form-field>
+<mat-form-field *ngIf="type === 'Physical'">
+    <input matInput [(ngModel)]="item.physicalPenetrationPercent" type="number" placeholder="Physical Penetration %">
+</mat-form-field>
 <mat-form-field *ngIf="type === 'Magical'">
     <input matInput [(ngModel)]="item.magicalPenetration" type="number" placeholder="Magical Penetration">
+</mat-form-field>
+<mat-form-field *ngIf="type === 'Magical'">
+    <input matInput [(ngModel)]="item.magicalPenetrationPercent" type="number" placeholder="Magical Penetration %">
 </mat-form-field>
 <mat-form-field *ngIf="type === 'Physical'">
     <input matInput [(ngModel)]="item.criticalChance" type="number" placeholder="Critical Chance">
